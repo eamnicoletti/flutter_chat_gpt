@@ -45,3 +45,6 @@ app.*.map.json
 
 # .env files
 .env
+
+# sensitive chatGPT API token
+lib/core/app_config.dart
