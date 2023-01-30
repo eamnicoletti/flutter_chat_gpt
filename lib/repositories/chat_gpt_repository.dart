@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../core/app_config.dart';
@@ -9,7 +11,7 @@ class ChatGptRepository {
 
   Future<String> promptMessage(String prompt) async {
     try {
-      const url = "https://api.openai.com/v1/completion";
+      const url = "https://api.openai.com/v1/completions";
 
       final response = await _dio.post(url,
           data: {
@@ -26,7 +28,8 @@ class ChatGptRepository {
           }));
 
       return response.data['choices'][0]['text'];
-    } on Exception catch (_) {
+    } on Exception catch (e, s) {
+      log("Error: ", stackTrace: s);
       return 'Ocorreu um erro! Por favor, tente novamente.';
     }
   }
